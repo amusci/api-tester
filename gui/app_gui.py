@@ -16,7 +16,12 @@ def start_app():
     # Method dropdown menu
     method_var = tk.StringVar(value="GET")
     tk.Label(root, text="Method:").grid(row=0, column=3)
-    method_menu = ttk.Combobox(root, textvariable=method_var, values=["GET", "POST", "PUT", "DELETE"])
+    method_menu = ttk.Combobox(
+        root,
+        textvariable=method_var,
+        values=["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
+        state="readonly"
+    )
     method_menu.grid(row=0, column=4, padx=10)
 
     # Headers input field
@@ -47,7 +52,7 @@ def start_app():
     # Send Button
     def handle_send():
         url = url_entry.get()
-        method = method_var.get()
+        method = method_var.get().upper() # I needed this so bad
         body = body_input.get("1.0", tk.END).strip()
         headers_raw = headers_input.get("1.0", tk.END).strip()
 
